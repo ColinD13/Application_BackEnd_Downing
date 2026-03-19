@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 //players
-const { getPlayer } = require('../controllers/playersController');
+const { getPlayers } = require('../controllers/playersController');
 const { getPlayerById } = require('../controllers/playersController');
 const { postPlayer } = require('../controllers/playersController');
 const { putPlayer } = require('../controllers/playersController');
 
-router.get('/players', getPlayer);
-router.get('/players', getPlayerById);
+router.get('/players', getPlayers);
+router.get('/players/:id', getPlayerById);
 router.post('/players', postPlayer);
 router.put('/players', putPlayer);
 

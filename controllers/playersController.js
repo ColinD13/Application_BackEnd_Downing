@@ -10,7 +10,7 @@ const getPlayers = async (req, res) => {
     }
 }
 
-const getPLayerById = async (req, res) => {
+const getPlayerById = async (req, res) => {
     try{
         const player_id = req.params.id;
         const result = await pool.query('select * from public.nfl_players where player_id = $1', [player_id]);
@@ -21,11 +21,11 @@ const getPLayerById = async (req, res) => {
     }
 }
 
-const postPlayers = async (req, res) => {
+const postPlayer = async (req, res) => {
     try{
         const { position, name, nfl_team} = req.body;
 
-        const result = await pool.query("insert into public.nfl_players (position, name, nfl_team) values ($1, $2, $3", [position, name, nfl_team]);
+        const result = await pool.query("insert into public.nfl_players (position, name, nfl_team) values ($1, $2, $3)", [position, name, nfl_team]);
 
         res.status(201).json({response: "Added the information you requested"})
     }
@@ -50,4 +50,4 @@ const putPlayer = async (req,res) => {
     }
 }
 
-module.exports = { getPlayers, postPlayers, putPlayer };
+module.exports = { getPlayers, postPlayer, putPlayer, getPlayerById };
