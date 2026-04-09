@@ -64,4 +64,4 @@ npm start
 - On a free account so make sure to not scale the API too much
 
 ## 7. Licenses
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. 
