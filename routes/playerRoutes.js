@@ -37,7 +37,7 @@ const { postTradePlayer } = require("../controllers/tradeInfoController");
 
 router.get("/trades_info", getTradeInfo);
 router.get("/trades_info/:id", getTradeInfoById);
-router.get("/trade_info", postTradePlayer);
+router.post("/trades_info", postTradePlayer);
 
 
 module.exports = router;

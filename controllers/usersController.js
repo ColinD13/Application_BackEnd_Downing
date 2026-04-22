@@ -23,6 +23,7 @@ const getUserById = async (req, res) => {
 
 const postUser = async (req, res) => {
     try{
+        console.log("POST HIT");
         const { name } = req.body;
 
         const result = await pool.query("insert into public.users (name) values ($1)", [name]);
