@@ -21,4 +21,18 @@ const getUserById = async (req, res) => {
     }
 }
 
-module.exports = { getUsers, getUserById};
+const postUser = async (req, res) => {
+    try{
+        const { name } = req.body;
+
+        const result = await pool.query("insert into public.users (name) values ($1)", [name]);
+
+        res.status(201).json({response: "Added the information you requested"})
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({error:"Server error"});
+    }
+}
+
+module.exports = { getUsers, getUserById, postUser};

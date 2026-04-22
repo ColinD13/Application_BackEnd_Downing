@@ -21,4 +21,18 @@ const getTradeById = async (req, res) => {
     }
 }
 
-module.exports = { getTrades, getTradeById};
+const postTrade = async (req, res) => {
+    try{
+        const { user_id_1, user_id_2, trade_date } = req.body;
+
+        const result = await pool.query("insert into public.trade (user_id_1, user_id_2, trade_date) values ($1, $2, $3)", [user_id_1, user_id_2, trade_date]);
+
+        res.status(201).json({response: "Added the information you requested"})
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({error:"Server error"});
+    }
+}
+
+module.exports = { getTrades, getTradeById, postTrade};

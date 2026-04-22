@@ -21,4 +21,18 @@ const getTradeInfoById = async (req, res) => {
     }
 }
 
-module.exports = { getTradeInfo, getTradeInfoById};
+const postTradePlayer = async (req, res) => {
+    try{
+        const { trade_id, player_id, direction_sent_to } = req.body;
+
+        const result = await pool.query("insert into public.trade_player (trade_id, player_id, direction_sent_to) values ($1, $2, $3)", [trade_id, player_id, direction_sent_to]);
+
+        res.status(201).json({response: "Added the information you requested"})
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({error:"Server error"});
+    }
+}
+
+module.exports = { getTradeInfo, getTradeInfoById, postTradePlayer};
