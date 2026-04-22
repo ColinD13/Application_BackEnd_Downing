@@ -36,4 +36,19 @@ const postUser = async (req, res) => {
     }
 }
 
-module.exports = { getUsers, getUserById, postUser};
+const putUser = async (req,res) => {
+    try{
+        //get the params sent in the body to post
+        const { name, user_id} = req.body;
+
+        const result = await pool.query("update public.users set name = ($2) where user_id = ($1)", [user_id, name]);
+
+        res.status(201).json({response: "Updated the information you requested"});
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error:"Server error"});
+    }
+}
+
+module.exports = { getUsers, getUserById, postUser, putUser};

@@ -35,4 +35,20 @@ const postTradePlayer = async (req, res) => {
     }
 }
 
-module.exports = { getTradeInfo, getTradeInfoById, postTradePlayer};
+const putTradePlayer = async (req,res) => {
+    try{
+        //get the params sent in the body to post
+        const { trade_player_id, player_id} = req.body;
+
+        const result = await pool.query("update public.trade_player set player_id = ($2) where trade_player_id = ($1)", [trade_player_id, player_id]);
+
+        res.status(201).json({response: "Updated the information you requested"});
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error:"Server error"});
+    }
+}
+
+
+module.exports = { getTradeInfo, getTradeInfoById, postTradePlayer, putTradePlayer};
