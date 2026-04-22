@@ -50,4 +50,21 @@ const putTrade = async (req,res) => {
     }
 }
 
-module.exports = { getTrades, getTradeById, postTrade, putTrade};
+const deleteTrade = async (req,res) => {
+    try{
+        //get the params sent in the body to post
+        const { trade_id } = req.body;
+
+        //delete the tradePlayers then delete the trade itself
+        const result_trade_player = await pool.query("delete from public.trade_player where trade_id = $1", [trade_id]);
+        const result_trade = await pool.query("delete from public.trade where trade_id = $1", [trade_id]);
+
+        res.status(201).json({response: "Deleted the information you requested"});
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error:"Server error"});
+    }
+}
+
+module.exports = { getTrades, getTradeById, postTrade, putTrade, deleteTrade};

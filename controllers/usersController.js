@@ -51,4 +51,19 @@ const putUser = async (req,res) => {
     }
 }
 
-module.exports = { getUsers, getUserById, postUser, putUser};
+const deleteUser = async (req,res) => {
+    try{
+        //get the params sent in the body to post
+        const { user_id } = req.body;
+
+        const result = await pool.query("delete from public.users where user_id = $1", [user_id]);
+
+        res.status(201).json({response: "Deleted the information you requested"});
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({error:"Server error"});
+    }
+}
+
+module.exports = { getUsers, getUserById, postUser, putUser, deleteUser};
